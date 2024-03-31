@@ -1,0 +1,1077 @@
+[
+  {
+    "message": "contains operation contained string (shallow path)",
+    "predicate": {
+      "op": "contains",
+      "value": "AB",
+      "path": "/stringABC"
+    },
+    "expect": true
+  },
+  {
+    "message": "contains operation non-contained string (shallow path)",
+    "predicate": {
+      "op": "contains",
+      "value": "XY",
+      "path": "/stringABC"
+    },
+    "expect": false
+  },
+  {
+    "message": "contains operation contained string (deep path)",
+    "predicate": {
+      "op": "contains",
+      "value": "MN",
+      "path": "/objA/objB/stringMNO"
+    },
+    "expect": true
+  },
+  {
+    "message": "contains operation non-contained string (deep path)",
+    "predicate": {
+      "op": "contains",
+      "value": "AB",
+      "path": "/objA/stringXYZ"
+    },
+    "expect": false
+  },
+  {
+    "message": "contains operation mismatching case (and ignore_case:false has no effect)",
+    "predicate": {
+      "op": "contains",
+      "value": "xy",
+      "path": "/objA/stringXYZ"
+    },
+    "expect": false
+  },
+  {
+    "message": "contains operation honors ignore_case:true",
+    "predicate": {
+      "op": "contains",
+      "value": "xy",
+      "path": "/objA/stringXYZ",
+      "ignore_case": true
+    },
+    "expect": true
+  },
+  {
+    "message": "contains operation for undefined value",
+    "predicate": {
+      "op": "contains",
+      "value": "does not matter",
+      "path": "/objZZZ/objZZZZZZZZ"
+    },
+    "expect": false
+  },
+  {
+    "message": "contains operation undefined value (with ignore_case:true)",
+    "predicate": {
+      "op": "contains",
+      "value": "does not matter",
+      "path": "/objZZZ/objZZZZZZZZ",
+      "ignore_case": true
+    },
+    "expect": false
+  },
+  {
+    "message": "contains operation undefined value (with ignore_case:true)",
+    "predicate": {
+      "op": "ends",
+      "value": "BC",
+      "path": "/stringABC"
+    },
+    "expect": true
+  },
+  {
+    "message": "ends operation returns false for non-ending string (shallow path)",
+    "predicate": {
+      "op": "ends",
+      "value": "AB",
+      "path": "/stringABC"
+    },
+    "expect": false
+  },
+  {
+    "message": "ends operation returns true for end string (deep path)",
+    "predicate": {
+      "op": "ends",
+      "value": "NO",
+      "path": "/objA/objB/stringMNO"
+    },
+    "expect": true
+  },
+  {
+    "message": "ends operation returns false for non-ending string (deep path)",
+    "predicate": {
+      "op": "ends",
+      "value": "XY",
+      "path": "/objA/stringXYZ"
+    },
+    "expect": false
+  },
+  {
+    "message": "ends operation returns false for mismatching case (and ignore_case:false has no effect)",
+    "predicate": {
+      "op": "ends",
+      "value": "yz",
+      "path": "/objA/stringXYZ"
+    },
+    "expect": false
+  },
+  {
+    "message": "ends operation honors ignore_case:true",
+    "predicate": {
+      "op": "ends",
+      "value": "yz",
+      "path": "/objA/stringXYZ",
+      "ignore_case": true
+    },
+    "expect": true
+  },
+  {
+    "message": "ends operation returns false for undefined value",
+    "predicate": {
+      "op": "ends",
+      "value": "does not matter",
+      "path": "/objZZZ/objZZZZZZZZ"
+    },
+    "expect": false
+  },
+  {
+    "message": "ends operation returns false for undefined value (with ignore_case:true)",
+    "predicate": {
+      "op": "ends",
+      "value": "does not matter",
+      "path": "/objZZZ/objZZZZZZZZ",
+      "ignore_case": true
+    },
+    "expect": false
+  },
+  {
+    "message": "in operation returns true for string value contained in supplied array",
+    "predicate": {
+      "op": "in",
+      "path": "/stringABC",
+      "value": [
+        "foo",
+        "ABC",
+        "bar"
+      ]
+    },
+    "expect": true
+  },
+  {
+    "message": "in operation returns false for string mismatched only by case, with ignore_case false",
+    "predicate": {
+      "op": "in",
+      "path": "/stringABC",
+      "value": [
+        "foo",
+        "aBc",
+        "bar"
+      ]
+    },
+    "expect": false
+  },
+  {
+    "message": "in operation returns true for shallow object in supplied array",
+    "predicate": {
+      "op": "in",
+      "path": "/objX/objY",
+      "value": [
+        "foo",
+        {
+          "num2": 2
+        },
+        "bar"
+      ]
+    },
+    "expect": true
+  },
+  {
+    "message": "in operation returns true for deep object in supplied array",
+    "predicate": {
+      "op": "in",
+      "path": "/objX",
+      "value": [
+        "foo",
+        {
+          "num1": 1,
+          "stringAbc": "Abc",
+          "objY": {
+            "num2": 2
+          }
+        },
+        "bar"
+      ]
+    },
+    "expect": true
+  },
+  {
+    "message": "in operation returns true for number value contained in supplied array",
+    "predicate": {
+      "op": "in",
+      "path": "/objA/num2",
+      "value": [
+        {
+          "foo": "foo"
+        },
+        2,
+        "bar"
+      ]
+    },
+    "expect": true
+  },
+  {
+    "message": "in operation returns false for string inside object mismatched only by case, with ignore_case false",
+    "predicate": {
+      "op": "in",
+      "path": "/objX",
+      "value": [
+        "foo",
+        {
+          "num1": 1,
+          "stringAbc": "aBc",
+          "objY": {
+            "num2": 2
+          }
+        },
+        "bar"
+      ]
+    },
+    "expect": false
+  },
+  {
+    "message": "in operation returns false for undefined value",
+    "predicate": {
+      "op": "in",
+      "value": [
+        "does not matter"
+      ],
+      "path": "/objZZZ/objZZZZZZZZ"
+    },
+    "expect": false
+  },
+  {
+    "message": "less operation returns true for greater predicate value",
+    "predicate": {
+      "op": "less",
+      "path": "/objA/objB/num3",
+      "value": 4
+    },
+    "expect": true
+  },
+  {
+    "message": "less operation returns false for lesser predicate value",
+    "predicate": {
+      "op": "less",
+      "path": "/objA/objB/num3",
+      "value": 2
+    },
+    "expect": false
+  },
+  {
+    "message": "less operation returns false for equal numeric value",
+    "predicate": {
+      "op": "less",
+      "path": "/objA/objB/num3",
+      "value": 3
+    },
+    "expect": false
+  },
+  {
+    "message": "less operation returns false for undefined value",
+    "predicate": {
+      "op": "less",
+      "value": 3,
+      "path": "/objZZZ/objZZZZZZZZ"
+    },
+    "expect": false
+  },
+  {
+    "message": "matches operation returns false for string that would make an invalid regex",
+    "predicate": {
+      "op": "matches",
+      "path": "/stringABC",
+      "value": "\\"
+    },
+    "expect": false
+  },
+  {
+    "message": "matches operation any value other than a RegExp or a string",
+    "predicate": {
+      "op": "matches",
+      "path": "/stringABC",
+      "value": "\\"
+    },
+    "expect": false
+  },
+  {
+    "message": "matches operation match when providing string that will become RegExp",
+    "predicate": {
+      "op": "matches",
+      "value": "[A-Z]*",
+      "path": "/stringABC"
+    },
+    "expect": true
+  },
+  {
+    "message": "matches operation different case string with ignore_case: true",
+    "predicate": {
+      "op": "matches",
+      "value": "aBc",
+      "path": "/stringABC",
+      "ignore_case": true
+    },
+    "expect": true
+  },
+  {
+    "message": "matches operation different case string without ignore_case: true",
+    "predicate": {
+      "op": "matches",
+      "value": "aBc",
+      "path": "/stringABC"
+    },
+    "expect": false
+  },
+  {
+    "message": "more operation returns false for greater predicate value",
+    "predicate": {
+      "op": "more",
+      "path": "/objA/objB/num3",
+      "value": 4
+    },
+    "expect": false
+  },
+  {
+    "message": "more operation returns true for lesser predicate value",
+    "predicate": {
+      "op": "more",
+      "path": "/objA/objB/num3",
+      "value": 2
+    },
+    "expect": true
+  },
+  {
+    "message": "more operation returns false for equal numeric value",
+    "predicate": {
+      "op": "more",
+      "path": "/objA/objB/num3",
+      "value": 3
+    },
+    "expect": false
+  },
+  {
+    "message": "more operation returns false for undefined value",
+    "predicate": {
+      "op": "more",
+      "value": 3,
+      "path": "/objZZZ/objZZZZZZZZ"
+    },
+    "expect": false
+  },
+  {
+    "message": "starts operation returns true for starting string (shallow path)",
+    "predicate": {
+      "op": "starts",
+      "value": "AB",
+      "path": "/stringABC"
+    },
+    "expect": true
+  },
+  {
+    "message": "starts operation returns false for non-starting string (shallow path)",
+    "predicate": {
+      "op": "starts",
+      "value": "BC",
+      "path": "/stringABC"
+    },
+    "expect": false
+  },
+  {
+    "message": "starts operation returns true for start string (deep path)",
+    "predicate": {
+      "op": "starts",
+      "value": "MN",
+      "path": "/objA/objB/stringMNO"
+    },
+    "expect": true
+  },
+  {
+    "message": "starts operation returns false for non-starting string (deep path)",
+    "predicate": {
+      "op": "starts",
+      "value": "YZ",
+      "path": "/objA/stringXYZ"
+    },
+    "expect": false
+  },
+  {
+    "message": "starts operation returns false for mismatching case (and ignore_case:false has no effect)",
+    "predicate": {
+      "op": "starts",
+      "value": "xy",
+      "path": "/objA/stringXYZ"
+    },
+    "expect": false
+  },
+  {
+    "message": "starts operation honors ignore_case:true",
+    "predicate": {
+      "op": "starts",
+      "value": "xy",
+      "path": "/objA/stringXYZ",
+      "ignore_case": true
+    },
+    "expect": true
+  },
+  {
+    "message": "starts operation returns false for undefined value",
+    "predicate": {
+      "op": "starts",
+      "value": "does not matter",
+      "path": "/objZZZ/objZZZZZZZZ"
+    },
+    "expect": false
+  },
+  {
+    "message": "starts operation returns false for undefined value (with ignore_case:true)",
+    "predicate": {
+      "op": "starts",
+      "value": "does not matter",
+      "path": "/objZZZ/objZZZZZZZZ",
+      "ignore_case": true
+    },
+    "expect": false
+  },
+  {
+    "message": "test operation matching string value",
+    "predicate": {
+      "op": "test",
+      "path": "/stringABC",
+      "value": "ABC"
+    },
+    "expect": true
+  },
+  {
+    "message": "test operation string mismatched only by case, with ignore_case false",
+    "predicate": {
+      "op": "test",
+      "path": "/stringABC",
+      "value": "aBc"
+    },
+    "expect": false
+  },
+  {
+    "message": "test operation matching shallow object",
+    "predicate": {
+      "op": "test",
+      "path": "/objX/objY",
+      "value": {
+        "num2": 2
+      }
+    },
+    "expect": true
+  },
+  {
+    "message": "test operation matching deep object",
+    "predicate": {
+      "op": "test",
+      "path": "/objX",
+      "value": {
+        "num1": 1,
+        "stringAbc": "Abc",
+        "objY": {
+          "num2": 2
+        }
+      }
+    },
+    "expect": true
+  },
+  {
+    "message": "test operation matching number value",
+    "predicate": {
+      "op": "test",
+      "path": "/objA/num2",
+      "value": 2
+    },
+    "expect": true
+  },
+  {
+    "message": "test operation matching array",
+    "predicate": {
+      "op": "test",
+      "path": "/arrayA",
+      "value": [
+        "a",
+        "b",
+        "c"
+      ]
+    },
+    "expect": true
+  },
+  {
+    "message": "test operation superset array",
+    "predicate": {
+      "op": "test",
+      "path": "/arrayA",
+      "value": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ]
+    },
+    "expect": false
+  },
+  {
+    "message": "test operation subset array",
+    "predicate": {
+      "op": "test",
+      "path": "/arrayA",
+      "value": [
+        "a",
+        "b"
+      ]
+    },
+    "expect": false
+  },
+  {
+    "message": "test operation string disguised as array",
+    "predicate": {
+      "op": "test",
+      "path": "/arrayA",
+      "value": "abcd"
+    },
+    "expect": false
+  },
+  {
+    "message": "test operation array disguised as a string",
+    "predicate": {
+      "op": "test",
+      "path": "/stringABC",
+      "value": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    "expect": false
+  },
+  {
+    "message": "test operation string inside object mismatched only by case, with ignore_case false",
+    "predicate": {
+      "op": "test",
+      "path": "/objX",
+      "value": {
+        "num1": 1,
+        "stringAbc": "aBc",
+        "objY": {
+          "num2": 2
+        }
+      }
+    },
+    "expect": false
+  },
+  {
+    "message": "test operation undefined value",
+    "predicate": {
+      "op": "test",
+      "path": "/objZZZ/objZZZZZZZZ",
+      "value": "does not matter"
+    },
+    "expect": false
+  },
+  {
+    "message": "test operation ModelHolder startsWith",
+    "predicate": {
+      "op": "starts",
+      "value": "rent+",
+      "path": "/modelHolder"
+    },
+    "expect": true
+  },
+  {
+    "message": "type operation returns true when matching number to type \"number\"",
+    "predicate": {
+      "op": "type",
+      "path": "/objA/num2",
+      "value": "number"
+    },
+    "expect": true
+  },
+  {
+    "message": "type operation returns false when matching string to type \"number\"",
+    "predicate": {
+      "op": "type",
+      "path": "/objA/stringXYZ",
+      "value": "number"
+    },
+    "expect": false
+  },
+  {
+    "message": "type operation returns true when matching string to type \"string\"",
+    "predicate": {
+      "op": "type",
+      "path": "/objA/stringXYZ",
+      "value": "string"
+    },
+    "expect": true
+  },
+  {
+    "message": "type operation returns false when matching number to type \"string\"",
+    "predicate": {
+      "op": "type",
+      "path": "/objA/num2",
+      "value": "string"
+    },
+    "expect": false
+  },
+  {
+    "message": "type operation returns true when matching boolean to type \"boolean\"",
+    "predicate": {
+      "op": "type",
+      "path": "/objA/boolT",
+      "value": "boolean"
+    },
+    "expect": true
+  },
+  {
+    "message": "type operation returns false when matching number to type \"boolean\"",
+    "predicate": {
+      "op": "type",
+      "path": "/objA/num2",
+      "value": "boolean"
+    },
+    "expect": false
+  },
+  {
+    "message": "type operation returns true when matching object to type \"object\"",
+    "predicate": {
+      "op": "type",
+      "path": "/objA/objB",
+      "value": "object"
+    },
+    "expect": true
+  },
+  {
+    "message": "type operation returns false when matching number to type \"object\"",
+    "predicate": {
+      "op": "type",
+      "path": "/objA/num2",
+      "value": "object"
+    },
+    "expect": false
+  },
+  {
+    "message": "type operation returns true when matching array to type \"array\"",
+    "predicate": {
+      "op": "type",
+      "path": "/arrayA",
+      "value": "array"
+    },
+    "expect": true
+  },
+  {
+    "message": "type operation returns false when matching number to type \"array\"",
+    "predicate": {
+      "op": "type",
+      "path": "/objA/num2",
+      "value": "array"
+    },
+    "expect": false
+  },
+  {
+    "message": "type operation returns true when matching null to type \"null\"",
+    "predicate": {
+      "op": "type",
+      "path": "/objA/null2",
+      "value": "null"
+    },
+    "expect": true
+  },
+  {
+    "message": "type operation returns false when matching number to type \"null\"",
+    "predicate": {
+      "op": "type",
+      "path": "/objA/num2",
+      "value": "null"
+    },
+    "expect": false
+  },
+  {
+    "message": "type operation returns true when matching undefined to type \"undefined\"",
+    "predicate": {
+      "op": "type",
+      "path": "/objA/not_a_thing",
+      "value": "undefined"
+    },
+    "expect": true
+  },
+  {
+    "message": "type operation returns false when matching number to type \"undefined\"",
+    "predicate": {
+      "op": "type",
+      "path": "/objA/num2",
+      "value": "undefined"
+    },
+    "expect": false
+  },
+  {
+    "message": "type operation returns false for undefined value",
+    "predicate": {
+      "op": "type",
+      "value": "does not matter",
+      "path": "/objZZZ/objZZZZZZZZ"
+    },
+    "expect": false
+  },
+  {
+    "message": "undefined operation returns true for non-existent key (shallow path)",
+    "predicate": {
+      "path": "/not_a_key",
+      "op": "undefined"
+    },
+    "expect": true
+  },
+  {
+    "message": "undefined operation returns true for non-existent key (deep path)",
+    "predicate": {
+      "path": "/objA/not_a_key",
+      "op": "undefined"
+    },
+    "expect": true
+  },
+  {
+    "message": "undefined operation returns false for existing key (shallow path)",
+    "predicate": {
+      "path": "/num1",
+      "op": "undefined"
+    },
+    "expect": false
+  },
+  {
+    "message": "undefined operation returns false for existing key with null value (shallow path)",
+    "predicate": {
+      "path": "/null1",
+      "op": "undefined"
+    },
+    "expect": false
+  },
+  {
+    "message": "undefined operation returns false for existing key (deep path)",
+    "predicate": {
+      "path": "/objA/objB/num3",
+      "op": "undefined"
+    },
+    "expect": false
+  },
+  {
+    "message": "undefined operation returns false for existing key with null value (deep path)",
+    "predicate": {
+      "path": "/objA/objB/null3",
+      "op": "undefined"
+    },
+    "expect": false
+  },
+  {
+    "message": "and operation returns true for AND case with shallow endpoint paths",
+    "predicate": {
+      "op": "and",
+      "apply": [
+        {
+          "op": "defined",
+          "path": "/stringA"
+        },
+        {
+          "op": "defined",
+          "path": "/stringABC"
+        }
+      ]
+    },
+    "expect": true
+  },
+  {
+    "message": "and operation returns true for AND case with deep endpoint paths",
+    "predicate": {
+      "op": "and",
+      "apply": [
+        {
+          "op": "defined",
+          "path": "/objA/stringX"
+        },
+        {
+          "op": "defined",
+          "path": "/objA/stringXYZ"
+        }
+      ]
+    },
+    "expect": true
+  },
+  {
+    "message": "and operation returns true for AND case with (t,t) and compound paths",
+    "predicate": {
+      "op": "and",
+      "path": "/objA",
+      "apply": [
+        {
+          "op": "defined",
+          "path": "/stringX"
+        },
+        {
+          "op": "defined",
+          "path": "/stringXYZ"
+        }
+      ]
+    },
+    "expect": true
+  },
+  {
+    "message": "and operation returns true for AND case with (t,t,t)",
+    "predicate": {
+      "op": "and",
+      "path": "/objA",
+      "apply": [
+        {
+          "op": "defined",
+          "path": "/stringX"
+        },
+        {
+          "op": "defined",
+          "path": "/stringXYZ"
+        },
+        {
+          "op": "defined",
+          "path": "/null2"
+        }
+      ]
+    },
+    "expect": true
+  },
+  {
+    "message": "and operation returns false for AND case with (t,f)",
+    "predicate": {
+      "op": "and",
+      "path": "/objA",
+      "apply": [
+        {
+          "op": "defined",
+          "path": "/stringX"
+        },
+        {
+          "op": "defined",
+          "path": "/not_real"
+        }
+      ]
+    },
+    "expect": false
+  },
+  {
+    "message": "and operation empty apply array",
+    "predicate": {
+      "op": "and",
+      "path": "/objA",
+      "apply": []
+    },
+    "expect": false
+  },
+  {
+    "message": "and operation nest or",
+    "predicate": {
+      "op": "and",
+      "apply": [
+        {
+          "op": "not",
+          "apply": [
+            {
+              "op": "test",
+              "path": "/stringA",
+              "value": "B"
+            }
+          ]
+        }
+      ]
+    },
+    "expect": true
+  },
+  {
+    "message": "not operation returns true for NOT case (f,f) with shallow endpoint paths",
+    "predicate": {
+      "op": "not",
+      "apply": [
+        {
+          "op": "defined",
+          "path": "/not_real_1"
+        },
+        {
+          "op": "defined",
+          "path": "/not_real_2"
+        }
+      ]
+    },
+    "expect": true
+  },
+  {
+    "message": "not operation returns true for NOT case (f,f) with deep endpoint paths",
+    "predicate": {
+      "op": "not",
+      "apply": [
+        {
+          "op": "defined",
+          "path": "/objA/not_real_1"
+        },
+        {
+          "op": "defined",
+          "path": "/objA/not_real_2"
+        }
+      ]
+    },
+    "expect": true
+  },
+  {
+    "message": "not operation NOT case with (t,f) and compound paths",
+    "predicate": {
+      "op": "not",
+      "path": "/objA",
+      "apply": [
+        {
+          "op": "defined",
+          "path": "/not_real_thing"
+        },
+        {
+          "op": "defined",
+          "path": "/stringXYZ"
+        }
+      ]
+    },
+    "expect": true
+  },
+  {
+    "message": "not operation returns true for OR case with (f,f)",
+    "predicate": {
+      "op": "not",
+      "path": "/objA",
+      "apply": [
+        {
+          "op": "defined",
+          "path": "/not_real_1"
+        },
+        {
+          "op": "defined",
+          "path": "/not_real_2"
+        }
+      ]
+    },
+    "expect": true
+  },
+  {
+    "message": "not operation empty apply array",
+    "predicate": {
+      "op": "not",
+      "path": "/objA",
+      "apply": []
+    },
+    "expect": false
+  },
+  {
+    "message": "or operation returns true for OR case with shallow endpoint paths",
+    "predicate": {
+      "op": "or",
+      "apply": [
+        {
+          "op": "defined",
+          "path": "/not_real_thing"
+        },
+        {
+          "op": "defined",
+          "path": "/stringABC"
+        }
+      ]
+    },
+    "expect": true
+  },
+  {
+    "message": "or operation returns true for OR case with deep endpoint paths",
+    "predicate": {
+      "op": "or",
+      "apply": [
+        {
+          "op": "defined",
+          "path": "/objA/not_real_thing"
+        },
+        {
+          "op": "defined",
+          "path": "/objA/stringXYZ"
+        }
+      ]
+    },
+    "expect": true
+  },
+  {
+    "message": "or operation returns true for OR case with (t,f) and compound paths",
+    "predicate": {
+      "op": "or",
+      "path": "/objA",
+      "apply": [
+        {
+          "op": "defined",
+          "path": "/not_real_thing"
+        },
+        {
+          "op": "defined",
+          "path": "/stringXYZ"
+        }
+      ]
+    },
+    "expect": true
+  },
+  {
+    "message": "or operation returns true for OR case with (t,f,t)",
+    "predicate": {
+      "op": "or",
+      "path": "/objA",
+      "apply": [
+        {
+          "op": "defined",
+          "path": "/stringX"
+        },
+        {
+          "op": "defined",
+          "path": "/not_real_thing"
+        },
+        {
+          "op": "defined",
+          "path": "/null2"
+        }
+      ]
+    },
+    "expect": true
+  },
+  {
+    "message": "or operation returns false for OR case with (f,f)",
+    "predicate": {
+      "op": "or",
+      "path": "/objA",
+      "apply": [
+        {
+          "op": "defined",
+          "path": "/not_real_1"
+        },
+        {
+          "op": "defined",
+          "path": "/not_real_2"
+        }
+      ]
+    },
+    "expect": false
+  },
+  {
+    "message": "or operation returns true for OR case with empty apply array",
+    "predicate": {
+      "op": "or",
+      "path": "/objA",
+      "apply": []
+    },
+    "expect": false
+  }
+]
